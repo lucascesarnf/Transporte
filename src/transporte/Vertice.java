@@ -18,7 +18,9 @@ public class Vertice {
     int sinal;
     int valor;
     int componente;
-    int cor;
+    int cor;    
+    int ordemT =0;
+    
     ArrayList<Vertice> aresta = new ArrayList();
 
     public Vertice(int posx, int posy, int sinal, int valor) {

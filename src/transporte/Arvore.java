@@ -14,7 +14,9 @@ import java.util.ArrayList;
 public class Arvore {
 
     ArrayList<Vertice> vert = new ArrayList();
+    ArrayList<Aresta> arestas = new ArrayList();
     ArrayList<Vertice> caminho = new ArrayList();
+    Vertice centro;
     Vertice sai;
     int[][] mat;
     int m;
@@ -89,25 +91,94 @@ public class Arvore {
         this.caminho.add(vert.get(0));
         while (fila.size() > 0) {
             if (fila.get(0).aresta.size() == 1) {
+                fila.get(0).ordemT = 0;
                 if (caminho.contains(fila.get(0))) {
                     caminho.remove(fila.get(0));
                 }
             } else {
                 for (int i = 0; i < fila.get(0).aresta.size(); i++) {
                     if (fila.get(0).aresta.get(i).cor == 0) {
+                        Aresta a = new Aresta(fila.get(0), fila.get(0).aresta.get(i));
+                        if (!arestas.contains(a)) {
+                            arestas.add(a);
+                        }
+                        fila.get(0).aresta.get(i).ordemT = fila.get(0).ordemT + 1;
                         fila.get(0).aresta.get(i).cor = 1;
                         caminho.add(fila.get(0).aresta.get(i));
                         fila.add(fila.get(0).aresta.get(i));
                     } else {
                         if (fila.contains(fila.get(0).aresta.get(i))) {
+                            centro = fila.get(0).aresta.get(i);
                             fila.get(0).aresta.get(i).cor = 2;
+                            Aresta a = new Aresta(fila.get(0), fila.get(0).aresta.get(i));
+                            a.marcada = 1;
+                            arestas.add(a);
+                            this.procuraCaminho();
+                            System.out.println("");
+                            fila.clear();
+                            break;
                         }
                     }
                 }
             }
-            fila.remove(0);
+            if (fila.size() > 0) {
+                fila.remove(0);
+            }
         }
-        this.imprimefila(vert);
+    }
+
+    public void imprimeordemT() {
+        for (int i = 0; i < vert.size(); i++) {
+            System.out.print("[" + vert.get(i).valor + "(" + vert.get(i).ordemT + ")]");
+        }
+    }
+
+    public void procuraCaminho() {
+        System.out.print("Ordem Topologica:");
+        this.imprimeordemT();
+        System.out.println("");
+        System.out.print("Aresta Para Busca:");
+        for (int i = 0; i < arestas.size(); i++) {
+            System.out.print("[" + arestas.get(i).a.valor + "-" + arestas.get(i).b.valor + "]");
+        }
+        System.out.println("");
+        caminho.clear();
+        int cont = 0;
+        for (int i = 0; i < vert.size(); i++) {
+            cont = 0;
+            for (int j = 0; j < arestas.size(); j++) {
+                if (arestas.get(j).a == vert.get(i) || arestas.get(j).b == vert.get(i)) {
+                    cont++;
+                }
+            }
+            if (cont > 1) {
+                if (!caminho.contains(vert.get(i))) {
+                    caminho.add(vert.get(i));
+                }
+            }
+        }
+        int verifica = 0;
+        if ((caminho.size()) % 2 == 1) {
+            System.out.println("ENNNNNNNNTREEEEEEEEI POOOOOORRAAAAAAAAA!");
+            
+            for (int i = 0; i < caminho.size(); i++) {
+                verifica = 0;
+                if (caminho.get(i).ordemT == (centro.ordemT - 1)) {
+                    for (int j = 0; j < caminho.get(i).aresta.size(); j++) {
+                        if (caminho.get(i).aresta.get(j) == centro) {                       
+                            verifica = 1;
+                        }
+                    }
+                    if (verifica == 0) {    
+                             
+                        System.out.println("["+caminho.get(i).valor+"-"+caminho.get(i).ordemT+"]");
+                        caminho.remove(caminho.get(i));
+                        break;
+                    }
+                }
+            }
+        }
+        System.out.println("Caminho:");
         this.imprimefila(caminho);
         this.varqsai();
     }
@@ -121,10 +192,10 @@ public class Arvore {
 
     public void calculasinal() {
         for (int i = 0; i < vert.size(); i++) {
-            if (i % 2 == 1) {                     
-                vert.get(i).sinal = -1;
-            } else {      
+            if (vert.get(i).ordemT % 2 == 0) {
                 vert.get(i).sinal = 1;
+            } else {
+                vert.get(i).sinal = -1;
             }
         }
     }
@@ -142,7 +213,13 @@ public class Arvore {
 
     public int[][] novocantonoroeste(int[][] cn) {
         int[][] cn2 = cn;
-
+        for (int i = 0; i < caminho.size(); i++) {
+            if (caminho.get(i).sinal < 0) {
+                cn2[caminho.get(i).posx][caminho.get(i).posy] -= sai.valor;
+            } else {
+                cn2[caminho.get(i).posx][caminho.get(i).posy] += sai.valor;
+            }
+        }
         return cn2;
     }
 

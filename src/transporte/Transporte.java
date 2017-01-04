@@ -17,14 +17,18 @@ public class Transporte {
     public static void main(String[] args) {
         // TODO code application logic here
         Dados d = new Dados();
+        System.out.println("Custo:");
         d.imprimemat(d.custo);
-        System.out.println("");
+        System.out.println("Canto Noroeste:");
         d.cantonoroeste();
         d.imprimemat(d.cn);
         System.out.println("");
-        d.uv();
-        d.imprimeuv();
+        do{
         d.otimiza();
+       }while(d.otimiza());
+       
+        System.out.println("Resposta ótima:");
+        d.imprimemat(d.cn);
     }
 
 }

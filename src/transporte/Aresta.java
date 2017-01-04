@@ -13,6 +13,7 @@ public class Aresta {
 
     Vertice a;
     Vertice b;
+    int marcada = 0;
 
     public Aresta(Vertice a, Vertice b) {
         this.a = a;
