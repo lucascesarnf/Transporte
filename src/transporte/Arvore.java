@@ -134,13 +134,13 @@ public class Arvore {
     }
 
     public void procuraCaminho() {
-        System.out.print("Ordem Topologica:");
+        /*System.out.print("Ordem Topologica:");
         this.imprimeordemT();
         System.out.println("");
         System.out.print("Aresta Para Busca:");
         for (int i = 0; i < arestas.size(); i++) {
             System.out.print("[" + arestas.get(i).a.valor + "-" + arestas.get(i).b.valor + "]");
-        }
+        }*/
         System.out.println("");
         caminho.clear();
         int cont = 0;
@@ -159,7 +159,6 @@ public class Arvore {
         }
         int verifica = 0;
         if ((caminho.size()) % 2 == 1) {
-            System.out.println("ENNNNNNNNTREEEEEEEEI POOOOOORRAAAAAAAAA!");
             
             for (int i = 0; i < caminho.size(); i++) {
                 verifica = 0;
@@ -171,7 +170,7 @@ public class Arvore {
                     }
                     if (verifica == 0) {    
                              
-                        System.out.println("["+caminho.get(i).valor+"-"+caminho.get(i).ordemT+"]");
+                       // System.out.println("["+caminho.get(i).valor+"-"+caminho.get(i).ordemT+"]");
                         caminho.remove(caminho.get(i));
                         break;
                     }

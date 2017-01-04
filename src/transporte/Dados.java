@@ -13,14 +13,14 @@ public class Dados {
 
     int[] u;
     int[] v;
-    int custo[][];
+    int custo[][];//matris de custos
     int cn[][];//recebe o canto noroeste
-    int otima[][];
-    int origem;
-    int destino;
+    int otima[][];//Matriz que calcula a otimidade da solução utilizando u e v
+    int origem;//Numero de ofertas
+    int destino;//Numero de procuras
     int[] oferta;
     int[] procura;
-    int verificacao = 0;
+    int verificacao = 0;//Variável de controle
 
     public Dados() {
         oferta = new int[]{15, 20, 25};//{15, 20, 25};//{6, 8, 10};
@@ -33,7 +33,7 @@ public class Dados {
         cn = new int[origem][destino];
         otima = new int[origem][destino];
         verificacao = 0;
-       // this.variaveisArtificiais();
+       // this.variaveisArtificiais();//Resposável por tratar que a oferta seja igual a procura e visse versa.
     }
     /*
     public void variaveisArtificiais() {
