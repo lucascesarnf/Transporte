@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ Esta classe é utilizada pela classe arvore para representar uma aresta
  */
 package transporte;
 
@@ -13,9 +11,9 @@ public class Aresta {
 
     Vertice a;
     Vertice b;
-    int marcada = 0;
+    int marcada = 0;//Variável utilizada para marcar vertice como visitado
 
-    public Aresta(Vertice a, Vertice b) {
+    public Aresta(Vertice a, Vertice b) {//Método construtor
         this.a = a;
         this.b = b;
     }

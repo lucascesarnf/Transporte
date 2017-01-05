@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ Esta classe é utilizada pela classe arvore para representar um vértice
  */
 package transporte;
 
@@ -13,17 +11,18 @@ import java.util.ArrayList;
  */
 public class Vertice {
 
-    int posx;
-    int posy;
-    int sinal;
-    int valor;
-    int componente;
-    int cor;    
-    int ordemT =0;
+    int posx;//Posição X do vertice na matriz
+    int posy;//Posição Y do vertice na matriz
+    int sinal;//Sinal do vertice
+    int valor;//Valor do vertice referente a matris
+    int componente;//Componete conexa do vertice
+    int cor;  //Coloração do vertice(Utilizado para busta em largura)  
+    int ordemT =0;//Ordem topológica do vertice(Utilizado para encontrar o menor caminho)
     
-    ArrayList<Vertice> aresta = new ArrayList();
+    ArrayList<Vertice> aresta = new ArrayList();/*Todo vertice tem um array que contem seus filhos
+    ou seja acessamos os filhos de cada vertice atravez do próprio objeto vertice*/
 
-    public Vertice(int posx, int posy, int sinal, int valor) {
+    public Vertice(int posx, int posy, int sinal, int valor) {//Método construtor
 
         this.posx = posx;
         this.posy = posy;

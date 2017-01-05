@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ Problema do transporte CCO
  */
 package transporte;
 
@@ -15,20 +13,23 @@ public class Transporte {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        //Criamos um objeto dados
         Dados d = new Dados();
         System.out.println("Custo:");
-        d.imprimemat(d.custo);
+        d.imprimemat(d.custo);//Vemos o seu custo
         System.out.println("Canto Noroeste:");
-        d.cantonoroeste();
-        d.imprimemat(d.cn);
+        d.cantonoroeste();//Chamamos o canto noroeste para calcular a soluçõa inicial
+        d.imprimemat(d.cn);//Vemos esta matriz:
         System.out.println("");
+        //Aqui otimizamos a resposta inicial até que ela seja satisfatória:
         do{
         d.otimiza();
+        d.custoTotal();
        }while(d.otimiza());
-       
+       //Quando si do loop temos a respostá ótima dentro d variável CN(d.cn)
         System.out.println("Resposta ótima:");
         d.imprimemat(d.cn);
+        d.custoTotal();
     }
 
 }
